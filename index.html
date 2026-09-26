@@ -16,26 +16,33 @@
         <label>Rows in 4" swatch <input type="number" id="swatch-rows" value="28" min="1" step="0.5"></label>
         <label>Desired width (in) <input type="number" id="want-width" value="40" min="0.5" step="0.5"></label>
         <label>Desired length (in) <input type="number" id="want-length" value="24" min="0.5" step="0.5"></label>
+        <label>Stitch repeat <input type="number" id="stitch-repeat" value="0" min="0" step="1"> <span class="hint">0 = none</span></label>
+        <label>Row repeat <input type="number" id="row-repeat" value="0" min="0" step="1"> <span class="hint">0 = none</span></label>
         <p id="stitch-result" class="result"></p>
     </div>
 
     <script>
+        function roundToMultiple(value, multiple) {
+            if (!multiple || multiple <= 0) return value;
+            return Math.round(value / multiple) * multiple;
+        }
+
         function updateStitches() {
             const swatchSts = Number(document.getElementById('swatch-sts').value);
             const swatchRows = Number(document.getElementById('swatch-rows').value);
             const width = Number(document.getElementById('want-width').value);
             const length = Number(document.getElementById('want-length').value);
-            const castOn = Math.round(width * swatchSts / 4);
-            const rows = Math.round(length * swatchRows / 4);
+            const stitchRepeat = Number(document.getElementById('stitch-repeat').value);
+            const rowRepeat = Number(document.getElementById('row-repeat').value);
+            const castOn = roundToMultiple(Math.round(width * swatchSts / 4), stitchRepeat);
+            const rows = roundToMultiple(Math.round(length * swatchRows / 4), rowRepeat);
             document.getElementById('stitch-result').textContent =
                 `Cast on ${castOn} stitches, work ${rows} rows.`;
         }
 
-        ['swatch-sts', 'swatch-rows', 'want-width', 'want-length'].forEach(function(id) {
-            document.getElementById(id).addEventListener('input', updateStitches);
-        });
+        ['swatch-sts', 'swatch-rows', 'want-width', 'want-length', 'stitch-repeat', 'row-repeat'].forEach(function(id) {
 
-        updateStitches();
+
     </script>
 </body>
 </html>

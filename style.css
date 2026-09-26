@@ -57,3 +57,9 @@ h1 {
     color: #c9a227;
     margin-bottom: 0;
 }
+
+.hint {
+    font-size: 13px;
+    color: #a89a7a;
+    margin-left: 6px;
+}
