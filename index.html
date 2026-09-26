@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stitch Math</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Stitch Math</h1>
+    <p class="tagline">Gauge math for anything — sweaters, blankets, scarves.</p>
+
+    <div class="calc">
+        <h2>Cast On & Rows</h2>
+        <label>Stitches in 4" swatch <input type="number" id="swatch-sts" value="20" min="1" step="0.5"></label>
+        <label>Rows in 4" swatch <input type="number" id="swatch-rows" value="28" min="1" step="0.5"></label>
+        <label>Desired width (in) <input type="number" id="want-width" value="40" min="0.5" step="0.5"></label>
+        <label>Desired length (in) <input type="number" id="want-length" value="24" min="0.5" step="0.5"></label>
+        <p id="stitch-result" class="result"></p>
+    </div>
+
+    <script>
+        function updateStitches() {
+            const swatchSts = Number(document.getElementById('swatch-sts').value);
+            const swatchRows = Number(document.getElementById('swatch-rows').value);
+            const width = Number(document.getElementById('want-width').value);
+            const length = Number(document.getElementById('want-length').value);
+            const castOn = Math.round(width * swatchSts / 4);
+            const rows = Math.round(length * swatchRows / 4);
+            document.getElementById('stitch-result').textContent =
+                `Cast on ${castOn} stitches, work ${rows} rows.`;
+        }
+
+        ['swatch-sts', 'swatch-rows', 'want-width', 'want-length'].forEach(function(id) {
+            document.getElementById(id).addEventListener('input', updateStitches);
+        });
+
+        updateStitches();
+    </script>
+</body>
+</html>
