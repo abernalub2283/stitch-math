@@ -44,6 +44,10 @@
         }
 
         ['swatch-sts', 'swatch-rows', 'want-width', 'want-length', 'stitch-repeat', 'row-repeat'].forEach(function(id) {
+             document.getElementById(id).addEventListener('input', updateStitches);
+        });
+
+    updateStitches();
 
 
     </script>
